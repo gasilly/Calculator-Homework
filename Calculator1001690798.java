@@ -1,28 +1,30 @@
 import java.util.Scanner;
 import java.lang.System;
+import java.util.Arrays;
 
 public class Calculator1001690798{
+	static String[] VALID_OPERATIONS = {"+", "-","*","/"};
 	public static void main(String[] args){
-		int selection = 0;
+		String selection;
 		float num1, num2;
 		Scanner input = new Scanner(System.in);
 		//Get the users calculation choice and the two numbers they will use on the calculation
-		while (selection != 5){
-			System.out.println("Please pick the operation you would like to perform on the calculator fromm the selection below");
-			System.out.println("1: addition");
-			System.out.println("2: subtraction");
-			System.out.println("3: multiplication");
-			System.out.println("4: division");
-			System.out.println("5: exit calculator");
+		while (true){
+			System.out.println("Please pick the operation you would like to perform(+ - * /) or q to quit");
 			//if the user inputs a bad valid like a string simply tell them to pick a new set of numbers and go back to the start of the selection process
 			try{
-				selection = input.nextInt();
-				if(selection == 5){
+				selection = input.nextLine();
+				if(selection.contains("q")){
 					System.exit(0);
+				}
+				else if(Arrays.asList(VALID_OPERATIONS).contains(selection) == false){
+					System.out.println("Please pick a valid operation");	
+					continue;
 				}
 				System.out.println("Please pick two numbers you would like to perform this on");
 				num1 = input.nextFloat();
 				num2 = input.nextFloat();
+				input.nextLine();
 			}
 			catch(Exception e){
 				System.out.println("\nPlease enter only numbers\n");
@@ -30,16 +32,16 @@ public class Calculator1001690798{
 				continue;
 			}
 			switch(selection){
-				case 1:
+				case "+":
 					addition(num1, num2);
 					break;
-				case 2:
+				case "-":
 					subtraction(num1, num2);
 					break;
-				case 3:
+				case "*":
 					multiplication(num1, num2);
 					break;
-				case 4:
+				case "/":
 					division(num1, num2);
 					break;
 			}
